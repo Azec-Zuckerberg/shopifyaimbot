@@ -1,0 +1,91 @@
+{% if product %}
+  <section class="section section--product" data-section-id="{{ section.id }}">
+    <article class="product" itemscope itemtype="https://schema.org/Product">
+      <div class="product__gallery">
+        {% if product.media.size > 0 %}
+          <div class="product__media-list">
+            {% for media in product.media %}
+              <div class="product__media-item" data-media-type="{{ media.media_type }}">
+                {{ media | media_tag: image_size: '1200x', loading: 'lazy' }}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="product__media-placeholder">
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+          <p class="todo-note">TODO: upload product imagery migrated from original site assets.</p>
+        {% endif %}
+      </div>
+      <div class="product__details">
+        <h1 class="product__title" itemprop="name">{{ product.title }}</h1>
+        {% render 'price', product: product, show_badge: true %}
+        <div class="product__description" itemprop="description">
+          {{ product.description }}
+        </div>
+        <div class="product__form">
+          {% form 'product', product, id: 'ProductForm-' | append: section.id, class: 'product-form' %}
+            {% if product.variants.size > 1 %}
+              <label class="product-form__option" for="VariantSelect-{{ section.id }}">
+                <span>{{ 'products.product.select_variant' | t }}</span>
+                <select id="VariantSelect-{{ section.id }}" name="id" class="product-form__select">
+                  {% for variant in product.variants %}
+                    <option
+                      value="{{ variant.id }}"
+                      {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                      {% unless variant.available %}disabled{% endunless %}
+                    >
+                      {{ variant.title }} – {{ variant.price | money }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </label>
+              <p class="todo-note">TODO: upgrade to per-option selectors if needed for UX parity with the original site.</p>
+            {% else %}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            {% endif %}
+            <label class="product-form__quantity" for="Quantity-{{ section.id }}">
+              <span>{{ 'products.product.quantity' | t }}</span>
+              <input
+                id="Quantity-{{ section.id }}"
+                type="number"
+                name="quantity"
+                min="1"
+                value="1"
+              >
+            </label>
+            <button
+              type="submit"
+              name="add"
+              class="btn btn--primary"
+              {% unless product.available %}disabled{% endunless %}
+            >
+              {% if product.available %}
+                {{ 'general.buttons.add_to_cart' | t }}
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </button>
+          {% endform %}
+        </div>
+        {% if product.metafields.custom.extra_details != blank %}
+          <div class="product__meta">
+            <h2>{{ 'products.product.extra_details' | t }}</h2>
+            {{ product.metafields.custom.extra_details }}
+          </div>
+        {% else %}
+          <p class="todo-note">TODO: connect product metafields for platform specs and delivery expectations.</p>
+        {% endif %}
+      </div>
+    </article>
+  </section>
+{% else %}
+  <p>{{ 'products.product.missing_product' | t }}</p>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": []
+}
+{% endschema %}

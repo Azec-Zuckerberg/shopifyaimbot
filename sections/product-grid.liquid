@@ -1,0 +1,83 @@
+{% liquid
+  assign collection_handle = section.settings.collection | default: settings.homepage_featured_collection | default: 'frontpage'
+  assign collection = collections[collection_handle]
+%}
+
+<section class="section section--product-grid" data-section-id="{{ section.id }}">
+  <div class="product-grid__header">
+    <h2 class="product-grid__title">{{ section.settings.heading }}</h2>
+    <p class="product-grid__subtitle">{{ section.settings.subheading }}</p>
+    {% if section.settings.view_all_label and collection %}
+      <a class="product-grid__view-all" href="{{ collection.url }}">{{ section.settings.view_all_label }}</a>
+    {% endif %}
+  </div>
+  <div class="product-grid__items">
+    {% if collection and collection.products_count > 0 %}
+      {% paginate collection.products by section.settings.products_to_show %}
+        {% for product in collection.products %}
+          {% render 'product-card', product: product, show_secondary_image: section.settings.show_secondary_image %}
+        {% endfor %}
+        {% if paginate.pages > 1 %}
+          {% render 'pagination', paginate: paginate %}
+        {% endif %}
+      {% endpaginate %}
+    {% else %}
+      <div class="product-grid__placeholder">
+        <p>{{ 'sections.product_grid.no_products' | t }}</p>
+        <p class="todo-note">TODO: wire collection once migrated products exist.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured offers"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Hand-selected boosts and bundles that mirror the current marketing site layout."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "default": "frontpage"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all offers"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 3,
+      "max": 24,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show hover image",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product grid"
+    }
+  ]
+}
+{% endschema %}

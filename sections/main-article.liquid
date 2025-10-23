@@ -1,0 +1,19 @@
+<article class="section section--article" data-section-id="{{ section.id }}">
+  <header class="article__header">
+    <h1 class="article__title">{{ article.title }}</h1>
+    <p class="article__meta">{{ article.published_at | date: "%B %d, %Y" }}</p>
+  </header>
+  <div class="article__content">
+    {{ article.content }}
+  </div>
+  <footer class="article__footer">
+    <a class="btn btn--ghost" href="{{ blog.url }}">{{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
+  </footer>
+</article>
+
+{% schema %}
+{
+  "name": "Main article",
+  "settings": []
+}
+{% endschema %}

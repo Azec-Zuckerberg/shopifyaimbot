@@ -1,0 +1,62 @@
+<section class="section section--order" data-section-id="{{ section.id }}">
+  <div class="order">
+    <h1 class="order__heading">{{ 'customer.order.title' | t: name: order.name }}</h1>
+    <p class="order__meta">
+      {{ 'customer.order.placed_on' | t: date: order.created_at | date: "%B %d, %Y" }}
+    </p>
+    <div class="order__status">
+      <span>{{ 'customer.order.payment_status' | t }}: {{ order.financial_status_label }}</span>
+      <span>{{ 'customer.order.fulfillment_status' | t }}: {{ order.fulfillment_status_label }}</span>
+    </div>
+    <table class="order__table">
+      <thead>
+        <tr>
+          <th>{{ 'customer.order.product' | t }}</th>
+          <th>{{ 'customer.order.sku' | t }}</th>
+          <th>{{ 'customer.order.price' | t }}</th>
+          <th>{{ 'customer.order.quantity' | t }}</th>
+          <th>{{ 'customer.order.total' | t }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for line_item in order.line_items %}
+          <tr>
+            <td data-label="{{ 'customer.order.product' | t }}">
+              <a href="{{ line_item.url }}">{{ line_item.title }}</a>
+              {% if line_item.fulfillment %}
+                <div class="order__fulfillment">
+                  <p>
+                    {{ 'customer.order.fulfillment_status' | t }}:
+                    {{ line_item.fulfillment.status_label }}
+                  </p>
+                  {% if line_item.fulfillment.tracking_url %}
+                    <a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }}</a>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </td>
+            <td data-label="{{ 'customer.order.sku' | t }}">{{ line_item.sku }}</td>
+            <td data-label="{{ 'customer.order.price' | t }}">{{ line_item.price | money }}</td>
+            <td data-label="{{ 'customer.order.quantity' | t }}">{{ line_item.quantity }}</td>
+            <td data-label="{{ 'customer.order.total' | t }}">{{ line_item.line_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="order__summary">
+      <p>{{ 'customer.order.subtotal' | t }} {{ order.subtotal_price | money }}</p>
+      {% if order.total_discounts > 0 %}
+        <p>{{ 'customer.order.discounts' | t }} -{{ order.total_discounts | money }}</p>
+      {% endif %}
+      <p>{{ 'customer.order.shipping' | t }} {{ order.total_shipping_price_set.shop_money.amount | money }}</p>
+      <p>{{ 'customer.order.total' | t }} {{ order.total_price | money }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer order",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+{
+  "name": "convertaimbot-shopify-theme",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev",
+    "check": "shopify theme check",
+    "push": "shopify theme push",
+    "format": "prettier --write \"**/*.{liquid,json,js,css}\"",
+    "legacy:dev": "npm --prefix Azec-Unlocks-back-test run dev",
+    "legacy:build": "npm --prefix Azec-Unlocks-back-test run build"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

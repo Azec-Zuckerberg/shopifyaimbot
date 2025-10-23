@@ -1,0 +1,52 @@
+{% if section.settings.enable_bar %}
+  <div class="announcement-bar" style="background-color: {{ section.settings.background }}; color: {{ section.settings.text_color }};">
+    <p class="announcement-bar__text">
+      {{ section.settings.message | escape }}
+      {% if section.settings.link_label and section.settings.link_url %}
+        <a href="{{ section.settings.link_url }}" class="announcement-bar__link">{{ section.settings.link_label }}</a>
+      {% endif %}
+    </p>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_bar",
+      "label": "Show announcement bar",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "Limited time offer – free shipping on qualifying orders"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color",
+      "default": "#0c0c0c"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

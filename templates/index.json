@@ -1,0 +1,149 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Seasonal boost",
+        "heading": "Unlock every camo and weapon fast",
+        "subheading": "This Shopify theme mirrors the Azec Unlocks marketing site so your team can keep publishing updates without code edits.",
+        "highlight_text": "Fast delivery · Private methods · Lifetime updates",
+        "primary_label": "Browse offers",
+        "primary_link": "/collections/all",
+        "secondary_label": "Read testimonials",
+        "secondary_link": "#Testimonials"
+      }
+    },
+    "features": {
+      "type": "feature-grid",
+      "blocks": {
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Security first",
+            "text": "Delivery flows reuse the original site's verified process with staged credential hand-offs."
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "icon": "clock",
+            "title": "Rapid turnaround",
+            "text": "Average completion time is under 24 hours thanks to the automation scripts previously used."
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "icon": "target",
+            "title": "Precision targeting",
+            "text": "Pick exact weapons, skins, or bundles from the theme editor to update promos without a deploy."
+          }
+        }
+      },
+      "block_order": [
+        "feature-1",
+        "feature-2",
+        "feature-3"
+      ],
+      "settings": {
+        "heading": "Why players choose Azec",
+        "subheading": "Modular sections map to the marketing layout so you can easily swap campaigns."
+      }
+    },
+    "stats": {
+      "type": "stats",
+      "blocks": {
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "value": "12k+",
+            "label": "Accounts unlocked"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "value": "4.9★",
+            "label": "Average rating"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "value": "72h",
+            "label": "Support response SLA"
+          }
+        }
+      },
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
+      "settings": {
+        "heading": "Community-backed performance",
+        "subheading": "Stats pulled from the previous site's analytics for continuity."
+      }
+    },
+    "product_grid": {
+      "type": "product-grid",
+      "settings": {
+        "heading": "Flagship bundles",
+        "subheading": "Connect a featured collection once products are live in Shopify.",
+        "collection": "frontpage",
+        "view_all_label": "View all bundles",
+        "products_to_show": 6,
+        "show_secondary_image": true
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Instant delivery and the same service I got on the original site.",
+            "name": "ShadowOps",
+            "role": "Top 100 worldwide"
+          }
+        },
+        "testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "All platform unlocks delivered with zero downtime.",
+            "name": "ApexCrew",
+            "role": "Console squad lead"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial-1",
+        "testimonial-2"
+      ],
+      "settings": {
+        "heading": "Player proof",
+        "subheading": "Curate testimonials via the theme editor or connect to a reviews app later."
+      }
+    },
+    "cta": {
+      "type": "cta",
+      "settings": {
+        "heading": "Ready to migrate?",
+        "text": "Launch the Shopify theme, connect products, and the original aesthetic stays intact.",
+        "primary_label": "Start shopping",
+        "primary_link": "/collections/all",
+        "secondary_label": "Contact support",
+        "secondary_link": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "features",
+    "stats",
+    "product_grid",
+    "testimonials",
+    "cta"
+  ]
+}

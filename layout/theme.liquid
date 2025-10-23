@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_primary | default: '#0c0c0c' }}">
+    {{ settings.body_font | font_face }}
+    {{ content_for_header }}
+    {{ 'app.css' | asset_url | stylesheet_tag }}
+    {{ 'app.js' | asset_url | script_tag: defer: true }}
+    <title>
+      {{ page_title }}
+      {% if current_tags %} – {{ current_tags | join: ', ' }}{% endif %}
+      {% if current_page != 1 %} – {{ 'general.pagination.page' | t: number: current_page }}{% endif %}
+    </title>
+  </head>
+  <body class="template-{{ template | handleize }}">
+    <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {% section 'footer' %}
+    {{ content_for_footer }}
+  </body>
+</html>

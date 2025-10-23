@@ -1,0 +1,11 @@
+{% assign tag = tag | default: 'a' %}
+{% assign classes = classes | default: 'btn' %}
+{% if tag == 'a' %}
+  <a class="{{ classes }}" href="{{ href }}" {{ attributes }}>
+    {{ label }}
+  </a>
+{% else %}
+  <button class="{{ classes }}" type="{{ type | default: 'button' }}" {{ attributes }}>
+    {{ label }}
+  </button>
+{% endif %}

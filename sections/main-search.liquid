@@ -1,0 +1,47 @@
+<section class="section section--search" data-section-id="{{ section.id }}">
+  <div class="search">
+    <h1 class="search__heading">{{ 'general.search.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search__form">
+      <label for="SearchInput-{{ section.id }}" class="search__label">{{ 'general.search.search_for' | t }}</label>
+      <input
+        id="SearchInput-{{ section.id }}"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        class="search__input"
+      >
+      <button class="btn btn--primary" type="submit">{{ 'general.search.submit' | t }}</button>
+    </form>
+    {% if search.performed %}
+      <p class="search__result-count">
+        {{ 'general.search.results_with_count' | t: count: search.results.size }}
+      </p>
+      <div class="search__results">
+        {% if search.results_count > 0 %}
+          <div class="search__grid">
+            {% for item in search.results %}
+              {% if item.object_type == 'product' %}
+                {% render 'product-card', product: item %}
+              {% else %}
+                <article class="search__article">
+                  <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                  <p>{{ item.content | strip_html | truncate: 120 }}</p>
+                </article>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% else %}
+          <p>{{ 'general.search.no_results' | t }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": []
+}
+{% endschema %}

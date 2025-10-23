@@ -1,0 +1,72 @@
+{% liquid
+  assign form_id = 'new'
+  assign default_country = form.country
+  assign default_province = form.province
+  if address
+    if address.id
+      assign form_id = address.id
+    endif
+    if address.country != blank
+      assign default_country = address.country
+    endif
+    if address.province != blank
+      assign default_province = address.province
+    endif
+  elsif form.id
+    assign form_id = form.id
+  endif
+%}
+<div class="customer-address-form">
+  <label class="customer-address-form__field" for="AddressFirstName_{{ form_id }}">
+    <span>{{ 'customer.addresses.first_name' | t }}</span>
+    <input id="AddressFirstName_{{ form_id }}" type="text" name="address[first_name]" value="{{ address.first_name | default: form.first_name }}" autocomplete="given-name">
+  </label>
+  <label class="customer-address-form__field" for="AddressLastName_{{ form_id }}">
+    <span>{{ 'customer.addresses.last_name' | t }}</span>
+    <input id="AddressLastName_{{ form_id }}" type="text" name="address[last_name]" value="{{ address.last_name | default: form.last_name }}" autocomplete="family-name">
+  </label>
+  <label class="customer-address-form__field" for="AddressCompany_{{ form_id }}">
+    <span>{{ 'customer.addresses.company' | t }}</span>
+    <input id="AddressCompany_{{ form_id }}" type="text" name="address[company]" value="{{ address.company | default: form.company }}" autocomplete="organization">
+  </label>
+  <label class="customer-address-form__field" for="AddressAddress1_{{ form_id }}">
+    <span>{{ 'customer.addresses.address1' | t }}</span>
+    <input id="AddressAddress1_{{ form_id }}" type="text" name="address[address1]" value="{{ address.address1 | default: form.address1 }}" autocomplete="address-line1">
+  </label>
+  <label class="customer-address-form__field" for="AddressAddress2_{{ form_id }}">
+    <span>{{ 'customer.addresses.address2' | t }}</span>
+    <input id="AddressAddress2_{{ form_id }}" type="text" name="address[address2]" value="{{ address.address2 | default: form.address2 }}" autocomplete="address-line2">
+  </label>
+  <label class="customer-address-form__field" for="AddressCity_{{ form_id }}">
+    <span>{{ 'customer.addresses.city' | t }}</span>
+    <input id="AddressCity_{{ form_id }}" type="text" name="address[city]" value="{{ address.city | default: form.city }}" autocomplete="address-level2">
+  </label>
+  <label class="customer-address-form__field" for="AddressCountry_{{ form_id }}">
+    <span>{{ 'customer.addresses.country' | t }}</span>
+    <select id="AddressCountry_{{ form_id }}" name="address[country]" class="customer-address-form__select" data-address-country-select data-form-id="{{ form_id }}" autocomplete="country">
+      {{ all_country_option_tags | country_option_tags: default_country }}
+    </select>
+  </label>
+  <label class="customer-address-form__field" for="AddressProvince_{{ form_id }}">
+    <span>{{ 'customer.addresses.province' | t }}</span>
+    <select id="AddressProvince_{{ form_id }}" name="address[province]" class="customer-address-form__select" data-address-province-select data-form-id="{{ form_id }}" autocomplete="address-level1">
+      {% if default_province %}
+        <option value="{{ default_province }}" selected>{{ default_province }}</option>
+      {% else %}
+        <option value="">{{ 'customer.addresses.province_placeholder' | t }}</option>
+      {% endif %}
+    </select>
+  </label>
+  <label class="customer-address-form__field" for="AddressZip_{{ form_id }}">
+    <span>{{ 'customer.addresses.zip' | t }}</span>
+    <input id="AddressZip_{{ form_id }}" type="text" name="address[zip]" value="{{ address.zip | default: form.zip }}" autocomplete="postal-code">
+  </label>
+  <label class="customer-address-form__field" for="AddressPhone_{{ form_id }}">
+    <span>{{ 'customer.addresses.phone' | t }}</span>
+    <input id="AddressPhone_{{ form_id }}" type="tel" name="address[phone]" value="{{ address.phone | default: form.phone }}" autocomplete="tel">
+  </label>
+  <label class="customer-address-form__checkbox" for="AddressDefault_{{ form_id }}">
+    <input id="AddressDefault_{{ form_id }}" type="checkbox" name="address[default]" {% if address == customer.default_address %}checked{% endif %}>
+    <span>{{ 'customer.addresses.set_default' | t }}</span>
+  </label>
+</div>

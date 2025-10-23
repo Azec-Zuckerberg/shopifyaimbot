@@ -1,0 +1,17 @@
+{% assign show_badge = show_badge | default: false %}
+<div class="price" data-price>
+  {% if product.compare_at_price_max > product.price %}
+    <span class="price__current">{{ product.price | money }}</span>
+    <span class="price__compare">{{ product.compare_at_price | money }}</span>
+    {% if show_badge %}
+      <span class="price__badge">{{ 'products.product.on_sale' | t }}</span>
+    {% endif %}
+  {% else %}
+    <span class="price__current">{{ product.price | money }}</span>
+  {% endif %}
+  {% if product.unit_price_measurement %}
+    <small class="price__unit">
+      {{ product.unit_price | money }}/{{ product.unit_price_measurement.reference_unit }}
+    </small>
+  {% endif %}
+</div>

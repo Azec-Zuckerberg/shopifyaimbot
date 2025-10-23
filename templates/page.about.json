@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero_about": {
+      "type": "hero",
+      "settings": {
+        "heading": "About Azec Unlocks",
+        "subheading": "This page mirrors the long-form story from the standalone site with editable copy blocks.",
+        "highlight_text": "Trusted operators · Proprietary methods · Community first",
+        "primary_label": "View services",
+        "primary_link": "/collections/all"
+      }
+    },
+    "about_richtext": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Our mission",
+        "content": "<p>Paste the detailed story from the legacy landing page here. Each paragraph can be updated directly in the theme editor, no code required.</p><p class=\"todo-note\">TODO: migrate original about copy once confirmed.</p>"
+      }
+    },
+    "about_features": {
+      "type": "feature-grid",
+      "settings": {
+        "heading": "How we operate",
+        "subheading": "Replicate the previous feature highlights with customizable tiles."
+      }
+    }
+  },
+  "order": [
+    "hero_about",
+    "about_richtext",
+    "about_features"
+  ]
+}

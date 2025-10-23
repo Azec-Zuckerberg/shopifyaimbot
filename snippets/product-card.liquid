@@ -1,0 +1,30 @@
+{% liquid
+  assign featured_media = product.featured_media
+  assign second_image = product.media[1]
+  assign show_secondary = show_secondary_image | default: false
+%}
+
+<article class="product-card">
+  <a class="product-card__media" href="{{ product.url }}">
+    {% if featured_media %}
+      {{ featured_media | media_tag: image_size: '800x', loading: 'lazy' }}
+      {% if show_secondary and second_image %}
+        <div class="product-card__media--secondary">
+          {{ second_image | media_tag: image_size: '800x', loading: 'lazy' }}
+        </div>
+      {% endif %}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag }}
+      <p class="todo-note">TODO: add featured image for {{ product.title }}.</p>
+    {% endif %}
+  </a>
+  <div class="product-card__content">
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    {% render 'price', product: product %}
+    <a class="btn btn--ghost product-card__cta" href="{{ product.url }}">
+      {{ 'products.product.view_details' | t }}
+    </a>
+  </div>
+</article>

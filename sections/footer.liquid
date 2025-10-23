@@ -1,0 +1,144 @@
+{% liquid
+  assign footer_menu = section.settings.footer_menu | default: 'footer'
+  assign footer_links = linklists[footer_menu] | default: linklists.footer
+  assign secondary_menu = section.settings.secondary_menu
+  assign secondary_links = blank
+  if secondary_menu != blank
+    assign secondary_links = linklists[secondary_menu]
+  endif
+  assign footer_logo = section.settings.logo | default: settings.logo
+%}
+
+<footer class="site-footer" role="contentinfo">
+  <div class="site-footer__inner">
+    <div class="site-footer__branding">
+      {% if footer_logo %}
+        <a href="{{ routes.root_url }}" class="site-footer__logo">
+          {{ footer_logo | image_url: width: 200 | image_tag: alt: shop.name }}
+        </a>
+      {% else %}
+        <span class="site-footer__name">{{ shop.name }}</span>
+      {% endif %}
+      <p class="site-footer__text">
+        {{ section.settings.footer_text | default: 'Our mission is to keep your gaming experience on point.' }}
+      </p>
+    </div>
+    <div class="site-footer__menus">
+      {% if footer_links != blank %}
+        <nav class="site-footer__nav" aria-label="{{ 'sections.footer.primary_menu' | t }}">
+          <h2 class="site-footer__heading">{{ section.settings.footer_menu_heading | default: 'Explore' }}</h2>
+          <ul>
+            {% for link in footer_links.links %}
+              <li>
+                <a class="site-footer__link" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+      {% if secondary_links and secondary_links.links.size > 0 %}
+        <nav class="site-footer__nav" aria-label="{{ 'sections.footer.secondary_menu' | t }}">
+          <h2 class="site-footer__heading">{{ section.settings.secondary_menu_heading | default: 'Support' }}</h2>
+          <ul>
+            {% for link in secondary_links.links %}
+              <li>
+                <a class="site-footer__link" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+    </div>
+    <div class="site-footer__meta">
+      {% if section.settings.show_social %}
+        <ul class="site-footer__social">
+          {% if settings.social_instagram != blank %}
+            <li><a href="{{ settings.social_instagram }}" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a></li>
+          {% endif %}
+          {% if settings.social_tiktok != blank %}
+            <li><a href="{{ settings.social_tiktok }}" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a></li>
+          {% endif %}
+          {% if settings.social_youtube != blank %}
+            <li><a href="{{ settings.social_youtube }}" aria-label="YouTube">{% render 'icon', name: 'youtube' %}</a></li>
+          {% endif %}
+          {% if settings.social_twitter != blank %}
+            <li><a href="{{ settings.social_twitter }}" aria-label="X">{% render 'icon', name: 'twitter' %}</a></li>
+          {% endif %}
+        </ul>
+      {% endif %}
+      {% if section.settings.show_payment_icons %}
+        <div class="site-footer__payments">
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <p class="site-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: 'All rights reserved.' }}
+      </p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo"
+    },
+    {
+      "type": "textarea",
+      "id": "footer_text",
+      "label": "Footer description"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Primary footer menu",
+      "default": "footer"
+    },
+    {
+      "type": "text",
+      "id": "footer_menu_heading",
+      "label": "Primary menu heading",
+      "default": "Explore"
+    },
+    {
+      "type": "link_list",
+      "id": "secondary_menu",
+      "label": "Secondary footer menu"
+    },
+    {
+      "type": "text",
+      "id": "secondary_menu_heading",
+      "label": "Secondary menu heading",
+      "default": "Support"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social links",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text override"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

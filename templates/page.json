@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "",
+        "content": "<p>Use the theme editor to populate this page.</p>"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

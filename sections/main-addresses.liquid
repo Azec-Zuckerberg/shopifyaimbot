@@ -1,0 +1,57 @@
+<section class="section section--addresses" data-section-id="{{ section.id }}">
+  <div class="addresses">
+    <h1 class="addresses__heading">{{ 'customer.addresses.title' | t }}</h1>
+    <div class="addresses__actions">
+      <button type="button" class="btn btn--primary" data-address-toggle>{{ 'customer.addresses.add_new' | t }}</button>
+    </div>
+    <div id="AddressFormNew" class="addresses__form" hidden>
+      {% form 'customer_address', customer.new_address %}
+        {% render 'customer-address-form' %}
+        <div class="addresses__buttons">
+          <button type="submit" class="btn btn--primary">{{ 'customer.addresses.save' | t }}</button>
+          <button type="button" class="btn btn--ghost" data-address-toggle>{{ 'customer.addresses.cancel' | t }}</button>
+        </div>
+      {% endform %}
+    </div>
+    {% if customer.addresses_count > 0 %}
+      <div class="addresses__list">
+        {% for address in customer.addresses %}
+          <article class="addresses__item" data-address-id="{{ address.id }}">
+            <h2 class="addresses__label">
+              {{ 'customer.addresses.address' | t }} {{ forloop.index }}
+              {% if address == customer.default_address %}
+                <span class="addresses__badge">{{ 'customer.addresses.default' | t }}</span>
+              {% endif %}
+            </h2>
+            <p>{{ address | format_address }}</p>
+            <div class="addresses__item-actions">
+              <button type="button" class="btn btn--ghost" data-address-edit="{{ address.id }}">{{ 'customer.addresses.edit' | t }}</button>
+              <form method="post" action="{{ routes.account_addresses_url }}/{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn--ghost">{{ 'customer.addresses.delete' | t }}</button>
+              </form>
+            </div>
+            <div id="EditAddress_{{ address.id }}" class="addresses__form" hidden>
+              {% form 'customer_address', address %}
+                {% render 'customer-address-form', address: address %}
+                <div class="addresses__buttons">
+                  <button type="submit" class="btn btn--primary">{{ 'customer.addresses.update' | t }}</button>
+                  <button type="button" class="btn btn--ghost" data-address-edit="{{ address.id }}">{{ 'customer.addresses.cancel' | t }}</button>
+                </div>
+              {% endform %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>{{ 'customer.addresses.none' | t }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer addresses",
+  "settings": []
+}
+{% endschema %}

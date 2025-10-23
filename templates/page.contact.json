@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Talk with support",
+        "text": "Need a specific unlock flow or have platform questions? Drop us a note.",
+        "support_email": "support@example.com",
+        "button_label": "Send message"
+      }
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "items": {
+      "type": "main-cart-items",
+      "settings": {}
+    },
+    "cta": {
+      "type": "cta",
+      "settings": {
+        "heading": "Need help with checkout?",
+        "text": "Remind customers about secure payment options mirrored from the old site.",
+        "primary_label": "Browse more products",
+        "primary_link": "/collections/all",
+        "secondary_label": "Contact support",
+        "secondary_link": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "items",
+    "cta"
+  ]
+}

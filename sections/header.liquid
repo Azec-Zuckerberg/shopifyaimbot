@@ -1,0 +1,78 @@
+{% liquid
+  assign menu = section.settings.menu | default: 'main-menu'
+  assign menu_links = linklists[menu] | default: linklists.main-menu
+  assign header_logo = section.settings.logo | default: settings.logo
+%}
+
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <div class="site-header__branding">
+      <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+        {% if header_logo != blank %}
+          {{ header_logo | image_url: width: 240 | image_tag: alt: shop.name, loading: 'lazy' }}
+        {% else %}
+          <span class="site-header__name">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+    <button class="site-header__nav-toggle" type="button" aria-expanded="false" aria-controls="header-navigation">
+      <span class="site-header__nav-toggle-label">{{ 'general.navigation.toggle' | t }}</span>
+    </button>
+    <nav class="site-header__nav" id="header-navigation" aria-label="{{ 'general.navigation.header' | t }}" aria-expanded="false">
+      <ul class="site-header__nav-list">
+        {% if menu_links != blank %}
+          {% for link in menu_links.links %}
+            <li class="site-header__nav-item">
+              <a href="{{ link.url }}" class="site-header__nav-link" {% if link.current %}aria-current="page"{% endif %}>
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li class="site-header__nav-item">{{ 'sections.header.no_menu' | t }}</li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+      <a class="site-header__cta btn btn--primary" href="{{ section.settings.cta_link }}">
+        {{ section.settings.cta_label }}
+      </a>
+    {% endif %}
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Header button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Header button link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary color",
+        "default": "#5a1fff"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background color",
+        "default": "#050505"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Body text color",
+        "default": "#f5f5f5"
+      },
+      {
+        "type": "font_picker",
+        "id": "body_font",
+        "label": "Body font",
+        "default": "system-ui"
+      }
+    ]
+  },
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Default logo",
+        "info": "Used when a section-specific logo is not set."
+      },
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Fallback menu",
+        "default": "main-menu"
+      }
+    ]
+  },
+  {
+    "name": "Footer & Social",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      },
+      {
+        "type": "url",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "url",
+        "id": "social_twitter",
+        "label": "Twitter / X URL"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_newsletter",
+        "label": "Enable newsletter form",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_radius",
+        "label": "Button radius",
+        "min": 0,
+        "max": 32,
+        "step": 1,
+        "default": 12
+      }
+    ]
+  },
+  {
+    "name": "Homepage defaults",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "homepage_featured_collection",
+        "label": "Default featured collection",
+        "default": "frontpage"
+      }
+    ]
+  }
+]
