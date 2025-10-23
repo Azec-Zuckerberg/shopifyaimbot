@@ -61,7 +61,8 @@
   },
   "products": {
     "product": {
-      "quantity": "Quantity",\n      "select_variant": "Select an option",
+      "quantity": "Quantity",
+      "select_variant": "Select an option",
       "sold_out": "Sold out",
       "extra_details": "More details",
       "view_details": "View details",
@@ -82,7 +83,8 @@
     "label": {
       "product": "Product",
       "price": "Price",
-      "quantity": "Quantity",\n      "select_variant": "Select an option",
+      "quantity": "Quantity",
+      "select_variant": "Select an option",
       "total": "Total"
     },
     "general": {
@@ -126,7 +128,7 @@
       "payment_status": "Payment status",
       "fulfillment_status": "Fulfillment status",
       "total": "Total",
-      "none": "You haven’t placed any orders yet."
+      "none": "You haven't placed any orders yet."
     },
     "account": {
       "title": "Account",
@@ -151,7 +153,8 @@
       "province_placeholder": "Select province",
       "zip": "Postal code",
       "phone": "Phone",
-      "set_default": "Set as default address",\n      "edit": "Edit",
+      "set_default": "Set as default address",
+      "edit": "Edit",
       "save": "Save address",
       "update": "Update address",
       "cancel": "Cancel",

@@ -7,11 +7,11 @@
     {{ settings.body_font | font_face }}
     {{ content_for_header }}
     {{ 'app.css' | asset_url | stylesheet_tag }}
-    {{ 'app.js' | asset_url | script_tag: defer: true }}
+    <script src="{{ 'app.js' | asset_url }}" defer></script>
     <title>
       {{ page_title }}
-      {% if current_tags %} – {{ current_tags | join: ', ' }}{% endif %}
-      {% if current_page != 1 %} – {{ 'general.pagination.page' | t: number: current_page }}{% endif %}
+      {% if current_tags %} - {{ current_tags | join: ', ' }}{% endif %}
+      {% if current_page != 1 %} - {{ 'general.pagination.page' | t: number: current_page }}{% endif %}
     </title>
   </head>
   <body class="template-{{ template | handleize }}">
