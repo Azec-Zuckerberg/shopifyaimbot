@@ -24,7 +24,7 @@
           {{ product.description }}
         </div>
         <div class="product__form">
-          {% form 'product', product, id: 'ProductForm-' | append: section.id, class: 'product-form' %}
+          {% form section.id, class: 'product-form' %}
             {% if product.variants.size > 1 %}
               <label class="product-form__option" for="VariantSelect-{{ section.id }}">
                 <span>{{ 'products.product.select_variant' | t }}</span>
@@ -89,3 +89,14 @@
   "settings": []
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% form 'product', product, id: 'ProductForm-' | append: section.id, class:
+    'product-form' %}"
+  to: "{% form section.id, class: 'product-form' %}"
+  position: 1184..1228
+{% endcomment %}
